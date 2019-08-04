@@ -10,20 +10,25 @@ You need to pass in the following environment variables:
 - RADARR_KEY -> The API key for your radarr server
 - RADARR4K_URL -> The endpoint of your radarr server you want to sync to
 - RADARR4K_KEY -> The API key for this server
+- RADARR_FOLDER -> The Path where HD movies are saved
+- RADARR4K_FOLDER -> The Path where 4K movies are saved
 - PROFILE_ID -> The profile number you want the video to transcode to
 
-## Example docker-compose.yml  
->\# radarrsync  
-> &nbsp;&nbsp;&nbsp;radarsync:  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;image:  dmanius/radarrsync-docker  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;container_name: radarrsync  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;environment:  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- RADARR_URL=https://radarr-url.com  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- RADARR4K_URL=https://radarr4k-url.com  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- RADARR_KEY=767a4a5283e0c48e39e922638f405a9  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- RADARR4K_KEY=f52de21g4e6c75ab19y34281cd84008a  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- PROFILE_ID=5  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restart:  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;always  
+## Example docker-compose.yml
+```yaml
+# radarrsync  
+radarsync: 
+  container_name: radarrsync
+  image: dmanius/radarrsync-docker
+  environment: 
+    - RADARR_URL=http://radarr:7878/radarr
+    - RADARR_KEY=your api key here
+    - RADARR_FOLDER=/media/movies
+    - RADARR4K_URL=http://radarr-4k:7878/radarr4k
+    - RADARR4K_KEY=your api key here
+    - RADARR4K_FOLDER=/media/movies-4k
+    - PROFILE_ID=5
+restart: always
+```
 ## Notes
  * Ensure that the root path is the same on both servers. ie /movie
